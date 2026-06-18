@@ -11,7 +11,7 @@ export function Pagination({ page, totalPages, onPageChange }: PaginationProps) 
 
   return (
     <nav
-      className="mt-8 flex flex-wrap items-center justify-center gap-2"
+      className="mt-8 mb-12 flex flex-wrap items-center justify-center gap-2 md:mb-16"
       aria-label="Phân trang"
     >
       <button
