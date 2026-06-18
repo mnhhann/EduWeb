@@ -1,7 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { EnrolledCourse } from "@/lib/enrollments";
-import { publicAsset } from "@/lib/utils";
+import { PublicImage } from "@/components/ui/PublicImage";
 
 type EnrolledCourseCardProps = {
   course: EnrolledCourse;
@@ -14,12 +13,11 @@ export function EnrolledCourseCard({ course }: EnrolledCourseCardProps) {
     <article className="overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm transition hover:shadow-md">
       {course.thumbnailUrl && (
         <div className="relative aspect-[4/3] w-full bg-zinc-100">
-          <Image
-            src={publicAsset(course.thumbnailUrl)}
+          <PublicImage
+            src={course.thumbnailUrl}
             alt={course.title}
             fill
             className="object-cover"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         </div>
       )}

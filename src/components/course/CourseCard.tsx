@@ -1,16 +1,16 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useAuthSession } from "@/hooks/useAuthSession";
-import { publicAsset } from "@/lib/utils";
+import { PublicImage } from "@/components/ui/PublicImage";
 import type { Course } from "@/types";
 
 type CourseCardProps = {
   course: Course;
+  priority?: boolean;
 };
 
-export function CourseCard({ course }: CourseCardProps) {
+export function CourseCard({ course, priority = false }: CourseCardProps) {
   const { isAuthenticated } = useAuthSession();
   const href = isAuthenticated ? `/courses/${course.slug}` : "/login";
 
@@ -18,12 +18,12 @@ export function CourseCard({ course }: CourseCardProps) {
     <Link href={href} className="course-card">
       {course.thumbnailUrl && (
         <div className="course-thumbnail">
-          <Image
-            src={publicAsset(course.thumbnailUrl)}
+          <PublicImage
+            src={course.thumbnailUrl}
             alt={course.title}
             fill
             className="object-cover"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            priority={priority}
           />
         </div>
       )}

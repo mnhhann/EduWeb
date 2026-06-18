@@ -110,8 +110,12 @@ export function FilteredSubjectGrid({
       {filtered.length > 0 ? (
         <>
           <div className="premium-grid">
-            {paginated.map((course) => (
-              <CourseCard key={course.id} course={course} />
+            {paginated.map((course, index) => (
+              <CourseCard
+                key={course.id}
+                course={course}
+                priority={page === 1 && index < pageSize}
+              />
             ))}
           </div>
           <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />

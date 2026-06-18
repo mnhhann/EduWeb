@@ -1,8 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import { publicAsset } from "@/lib/utils";
+import { PublicImage } from "@/components/ui/PublicImage";
 
 type CarouselSlide = {
   id: string;
@@ -67,12 +66,11 @@ export function DashboardCarousel({ slides = defaultSlides }: DashboardCarouselP
               key={item.id}
               className={`carousel-slide ${isActive ? "active" : "inactive"}`}
             >
-              <Image
-                src={publicAsset(item.image)}
+              <PublicImage
+                src={item.image}
                 alt={item.title}
                 fill
                 className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 70vw"
                 priority={index === 0}
               />
               <div className="carousel-overlay" />
