@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { EnrolledCourse } from "@/lib/enrollments";
+import { publicAsset } from "@/lib/utils";
 
 type EnrolledCourseCardProps = {
   course: EnrolledCourse;
@@ -14,7 +15,7 @@ export function EnrolledCourseCard({ course }: EnrolledCourseCardProps) {
       {course.thumbnailUrl && (
         <div className="relative aspect-[4/3] w-full bg-zinc-100">
           <Image
-            src={course.thumbnailUrl}
+            src={publicAsset(course.thumbnailUrl)}
             alt={course.title}
             fill
             className="object-cover"

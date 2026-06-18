@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { publicAsset } from "@/lib/utils";
 
 type CarouselSlide = {
   id: string;
@@ -67,7 +68,7 @@ export function DashboardCarousel({ slides = defaultSlides }: DashboardCarouselP
               className={`carousel-slide ${isActive ? "active" : "inactive"}`}
             >
               <Image
-                src={item.image}
+                src={publicAsset(item.image)}
                 alt={item.title}
                 fill
                 className="object-cover"

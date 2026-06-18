@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useAuthSession } from "@/hooks/useAuthSession";
+import { publicAsset } from "@/lib/utils";
 import type { Course } from "@/types";
 
 type CourseCardProps = {
@@ -18,7 +19,7 @@ export function CourseCard({ course }: CourseCardProps) {
       {course.thumbnailUrl && (
         <div className="course-thumbnail">
           <Image
-            src={course.thumbnailUrl}
+            src={publicAsset(course.thumbnailUrl)}
             alt={course.title}
             fill
             className="object-cover"
