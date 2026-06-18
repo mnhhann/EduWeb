@@ -25,6 +25,12 @@ export function publicAsset(path: string): string {
   return `${base}${normalized}`;
 }
 
+export function appHref(path: string): string {
+  const normalized = path.startsWith("/") ? path : `/${path}`;
+  const withTrailingSlash = normalized.endsWith("/") ? normalized : `${normalized}/`;
+  return publicAsset(withTrailingSlash);
+}
+
 export function formatPrice(price: number) {
   if (price === 0) return "Miễn phí";
   return `${price.toLocaleString("vi-VN")} đ`;

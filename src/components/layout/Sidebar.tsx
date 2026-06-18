@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { LogoutButton } from "@/components/auth";
+import { appHref } from "@/lib/utils";
 
 type SidebarProps = {
   variant: "student" | "admin";
@@ -21,6 +21,17 @@ const adminLinks = [
   { href: "/admin/users", label: "Người dùng" },
 ];
 
+function normalizePath(path: string) {
+  if (path.length > 1 && path.endsWith("/")) {
+    return path.slice(0, -1);
+  }
+  return path;
+}
+
+function isExactNavMatch(pathname: string, href: string) {
+  return normalizePath(pathname) === normalizePath(href);
+}
+
 export function Sidebar({ variant }: SidebarProps) {
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
@@ -31,22 +42,22 @@ export function Sidebar({ variant }: SidebarProps) {
   }, []);
 
   return (
-    <aside className="sticky top-0 flex h-screen w-64 shrink-0 flex-col border-r border-zinc-200 bg-white p-4">
-      <Link href="/" className="mb-6 block text-lg font-bold text-blue-600">
+    <aside className="sticky top-0 z-20 flex h-screen w-64 shrink-0 flex-col border-r border-zinc-200 bg-white p-4">
+      <a href={appHref("/")} className="mb-6 block text-lg font-bold text-blue-600">
         EduWeb
-      </Link>
+      </a>
       <nav className="flex flex-col gap-1">
         {links.map((link) => {
           const isActive =
             mounted &&
             (link.href === "/admin" || link.href === "/dashboard"
-              ? pathname === link.href
+              ? isExactNavMatch(pathname, link.href)
               : pathname.startsWith(link.href));
 
           return (
-            <Link
+            <a
               key={link.href}
-              href={link.href}
+              href={appHref(link.href)}
               className={`rounded-lg px-3 py-2 text-sm ${
                 isActive
                   ? "bg-blue-50 font-medium text-blue-600"
@@ -54,7 +65,7 @@ export function Sidebar({ variant }: SidebarProps) {
               }`}
             >
               {link.label}
-            </Link>
+            </a>
           );
         })}
       </nav>
