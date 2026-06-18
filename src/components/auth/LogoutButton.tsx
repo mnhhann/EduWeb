@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { logoutClient } from "@/lib/auth-session";
 
 type LogoutButtonProps = {
   variant?: "sidebar" | "header";
@@ -11,15 +12,11 @@ export function LogoutButton({ variant = "sidebar" }: LogoutButtonProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  async function handleLogout() {
+  function handleLogout() {
     setIsLoading(true);
-    try {
-      await fetch("/api/auth/logout", { method: "POST" });
-      router.push("/login");
-      router.refresh();
-    } finally {
-      setIsLoading(false);
-    }
+    logoutClient();
+    router.push("/login");
+    setIsLoading(false);
   }
 
   const className =

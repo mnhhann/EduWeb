@@ -4,6 +4,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FloatingInput, PasswordField } from "./AuthFields";
+import { isValidCredentials } from "@/lib/auth";
+import { loginClient } from "@/lib/auth-session";
+
 import { AuthLogo } from "./AuthLogo";
 
 export function LoginForm() {
@@ -13,31 +16,20 @@ export function LoginForm() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
     setIsLoading(true);
 
-    try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (!response.ok) {
-        const data = (await response.json()) as { message?: string };
-        setError(data.message ?? "Tên tài khoản hoặc mật khẩu không đúng.");
-        return;
-      }
-
-      router.push("/dashboard");
-      router.refresh();
-    } catch {
-      setError("Không thể đăng nhập. Vui lòng thử lại.");
-    } finally {
+    if (!isValidCredentials(username.trim(), password)) {
+      setError("Tên tài khoản hoặc mật khẩu không đúng.");
       setIsLoading(false);
+      return;
     }
+
+    loginClient();
+    router.push("/dashboard");
+    setIsLoading(false);
   }
 
   return (

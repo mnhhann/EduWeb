@@ -1,5 +1,6 @@
 import { UserAccountLink } from "@/components/layout/UserAccountLink";
 import { Sidebar } from "@/components/layout/Sidebar";
+import { AuthGuard } from "@/components/auth/AuthGuard";
 
 export default function StudentLayout({
   children,
@@ -13,7 +14,9 @@ export default function StudentLayout({
         <div className="flex justify-end border-b border-zinc-200 bg-white px-6 py-3">
           <UserAccountLink />
         </div>
-        <main className="flex-1 bg-zinc-50 p-6">{children}</main>
+        <main className="flex-1 bg-zinc-50 p-6">
+          <AuthGuard>{children}</AuthGuard>
+        </main>
       </div>
     </div>
   );

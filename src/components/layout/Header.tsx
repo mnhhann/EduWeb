@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { useAuthSession } from "@/hooks/useAuthSession";
 import { UserAccountLink } from "./UserAccountLink";
 
 const navLinks = [
@@ -14,16 +15,10 @@ const navLinks = [
 export function Header() {
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { isAuthenticated } = useAuthSession();
 
   useEffect(() => {
     setMounted(true);
-    fetch("/api/auth/session")
-      .then((res) => res.json())
-      .then((data: { authenticated?: boolean }) => {
-        setIsAuthenticated(!!data.authenticated);
-      })
-      .catch(() => setIsAuthenticated(false));
   }, []);
 
   return (

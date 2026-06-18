@@ -1,6 +1,15 @@
+import { demoEnrollments } from "@/lib/enrollments";
+
 type LessonPageProps = {
   params: Promise<{ courseId: string; lessonId: string }>;
 };
+
+export function generateStaticParams() {
+  return demoEnrollments.map((course) => ({
+    courseId: course.id,
+    lessonId: "1",
+  }));
+}
 
 export default async function LessonPage({ params }: LessonPageProps) {
   const { courseId, lessonId } = await params;
