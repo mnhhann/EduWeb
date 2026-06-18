@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AppLink } from "@/components/ui/AppLink";
 import type { EnrolledCourse } from "@/lib/enrollments";
 import { PublicImage } from "@/components/ui/PublicImage";
 
@@ -43,12 +43,12 @@ export function EnrolledCourseCard({ course }: EnrolledCourseCardProps) {
           </p>
         </div>
 
-        <Link
+        <AppLink
           href={continueHref}
           className="mt-4 inline-flex w-full items-center justify-center rounded-md bg-blue-800 py-2 text-sm font-medium text-white transition hover:bg-blue-900"
         >
           Tiếp tục học
-        </Link>
+        </AppLink>
       </div>
     </article>
   );

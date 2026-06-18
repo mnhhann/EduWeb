@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { AppLink } from "@/components/ui/AppLink";
 import { useEffect, useState } from "react";
 import { useAuthSession } from "@/hooks/useAuthSession";
 
@@ -39,13 +39,13 @@ export function UserAccountLink() {
   const href = isAuthenticated ? "/profile" : "/login";
 
   return (
-    <Link
+    <AppLink
       href={href}
       className="flex h-9 w-9 items-center justify-center rounded-full border border-zinc-300 text-zinc-600 transition hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700"
       aria-label="Tài khoản"
       title="Tài khoản"
     >
       <UserIcon className="h-5 w-5" />
-    </Link>
+    </AppLink>
   );
 }

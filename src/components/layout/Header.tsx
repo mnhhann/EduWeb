@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { AppLink } from "@/components/ui/AppLink";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useAuthSession } from "@/hooks/useAuthSession";
@@ -24,9 +24,9 @@ export function Header() {
   return (
     <header className="border-b border-zinc-200 bg-white">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
-        <Link href="/" className="text-xl font-bold text-blue-600">
+        <AppLink href="/" className="text-xl font-bold text-blue-600">
           EduWeb
-        </Link>
+        </AppLink>
         <nav className="flex items-center gap-4 sm:gap-6">
           {navLinks.map((link) => {
             const isActive =
@@ -34,7 +34,7 @@ export function Header() {
               (link.href === "/" ? pathname === "/" : pathname.startsWith(link.href));
 
             return (
-              <Link
+              <AppLink
                 key={link.href}
                 href={link.href}
                 className={`text-sm ${
@@ -44,16 +44,16 @@ export function Header() {
                 }`}
               >
                 {link.label}
-              </Link>
+              </AppLink>
             );
           })}
           {!isAuthenticated && (
-            <Link
+            <AppLink
               href="/login"
               className="rounded-lg bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700"
             >
               Đăng nhập
-            </Link>
+            </AppLink>
           )}
           <UserAccountLink />
         </nav>

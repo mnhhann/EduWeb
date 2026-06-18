@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { AppLink } from "@/components/ui/AppLink";
 import { useAuthSession } from "@/hooks/useAuthSession";
 
 type AuthRequiredLinkProps = {
@@ -14,8 +14,8 @@ export function AuthRequiredLink({ href, className, children }: AuthRequiredLink
   const targetHref = isAuthenticated ? href : "/login";
 
   return (
-    <Link href={targetHref} className={className}>
+    <AppLink href={targetHref} className={className}>
       {children}
-    </Link>
+    </AppLink>
   );
 }

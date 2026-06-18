@@ -1,22 +1,20 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { logoutClient } from "@/lib/auth-session";
+import { navigateApp } from "@/lib/navigation";
 
 type LogoutButtonProps = {
   variant?: "sidebar" | "header";
 };
 
 export function LogoutButton({ variant = "sidebar" }: LogoutButtonProps) {
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   function handleLogout() {
     setIsLoading(true);
     logoutClient();
-    router.push("/login");
-    setIsLoading(false);
+    navigateApp("/login");
   }
 
   const className =

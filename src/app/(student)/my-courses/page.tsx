@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AppLink } from "@/components/ui/AppLink";
 import { EnrolledCourseCard } from "@/components/course";
 import { getDemoEnrollments } from "@/lib/enrollments";
 
@@ -42,12 +42,12 @@ export default function MyCoursesPage() {
       ) : (
         <section className="mt-8 rounded-xl border border-dashed border-zinc-300 bg-white p-10 text-center">
           <p className="text-zinc-600">Bạn chưa đăng ký khóa học nào.</p>
-          <Link
+          <AppLink
             href="/courses"
             className="mt-4 inline-block rounded-md bg-blue-800 px-4 py-2 text-sm font-medium text-white hover:bg-blue-900"
           >
             Khám phá môn học
-          </Link>
+          </AppLink>
         </section>
       )}
     </div>

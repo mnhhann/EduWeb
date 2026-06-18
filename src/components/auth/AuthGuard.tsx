@@ -1,8 +1,9 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useAuthSession } from "@/hooks/useAuthSession";
+import { navigateApp, isStaticDeploy } from "@/lib/navigation";
+import { useRouter } from "next/navigation";
 
 export function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -10,7 +11,11 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
-      router.replace("/login");
+      if (isStaticDeploy()) {
+        navigateApp("/login");
+      } else {
+        router.replace("/login");
+      }
     }
   }, [isAuthenticated, isLoading, router]);
 

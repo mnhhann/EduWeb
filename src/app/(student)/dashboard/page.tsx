@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AppLink } from "@/components/ui/AppLink";
 import { FilteredSubjectGrid } from "@/components/course";
 import { DashboardCarousel } from "@/components/dashboard";
 
@@ -22,9 +22,9 @@ export default function StudentDashboardPage() {
               Khám phá và đăng ký môn học mới.
             </p>
           </div>
-          <Link href="/courses" className="premium-link">
+          <AppLink href="/courses" className="premium-link">
             Xem tất cả <span>→</span>
-          </Link>
+          </AppLink>
         </div>
         <div>
           <FilteredSubjectGrid />

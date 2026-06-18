@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { AppLink } from "@/components/ui/AppLink";
 import { useState } from "react";
 import { FloatingInput, PasswordField } from "./AuthFields";
 import { AuthLogo } from "./AuthLogo";
@@ -91,9 +91,9 @@ export function RegisterForm() {
 
       <p className="mt-6 text-center text-sm text-zinc-600">
         Đã có tài khoản?{" "}
-        <Link href="/login" className="font-medium text-blue-700 hover:underline">
+        <AppLink href="/login" className="font-medium text-blue-700 hover:underline">
           Đăng nhập
-        </Link>
+        </AppLink>
       </p>
     </div>
   );

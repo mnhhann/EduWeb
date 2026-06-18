@@ -1,16 +1,15 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { AppLink } from "@/components/ui/AppLink";
 import { FloatingInput, PasswordField } from "./AuthFields";
 import { isValidCredentials } from "@/lib/auth";
 import { loginClient } from "@/lib/auth-session";
+import { navigateApp } from "@/lib/navigation";
 
 import { AuthLogo } from "./AuthLogo";
 
 export function LoginForm() {
-  const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -28,8 +27,7 @@ export function LoginForm() {
     }
 
     loginClient();
-    router.push("/dashboard");
-    setIsLoading(false);
+    navigateApp("/dashboard");
   }
 
   return (
@@ -69,9 +67,9 @@ export function LoginForm() {
             />
             Ghi nhớ tài khoản
           </label>
-          <Link href="#" className="text-blue-700 hover:underline">
+          <a href="#" className="text-blue-700 hover:underline">
             Quên mật khẩu?
-          </Link>
+          </a>
         </div>
 
         <button
@@ -85,9 +83,9 @@ export function LoginForm() {
 
       <p className="mt-6 text-center text-sm text-zinc-600">
         Chưa có tài khoản?{" "}
-        <Link href="/register" className="font-medium text-blue-700 hover:underline">
+        <AppLink href="/register" className="font-medium text-blue-700 hover:underline">
           Đăng ký
-        </Link>
+        </AppLink>
       </p>
     </div>
   );

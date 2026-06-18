@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AppLink } from "@/components/ui/AppLink";
 import { FilteredSubjectGrid } from "@/components/course";
 import { AuthRequiredLink } from "@/components/auth";
 export default function HomePage() {
@@ -25,9 +25,9 @@ export default function HomePage() {
               Danh sách môn học phổ biến trên nền tảng.
             </p>
           </div>
-          <Link href="/courses" className="premium-link">
+          <AppLink href="/courses" className="premium-link">
             Xem tất cả <span>→</span>
-          </Link>
+          </AppLink>
         </div>
         <div>
           <FilteredSubjectGrid />

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { LogoutButton } from "@/components/auth";
-import { appHref } from "@/lib/utils";
+import { AppLink } from "@/components/ui/AppLink";
 
 type SidebarProps = {
   variant: "student" | "admin";
@@ -43,9 +43,9 @@ export function Sidebar({ variant }: SidebarProps) {
 
   return (
     <aside className="sticky top-0 z-20 flex h-screen w-64 shrink-0 flex-col border-r border-zinc-200 bg-white p-4">
-      <a href={appHref("/")} className="mb-6 block text-lg font-bold text-blue-600">
+      <AppLink href="/" className="mb-6 block text-lg font-bold text-blue-600">
         EduWeb
-      </a>
+      </AppLink>
       <nav className="flex flex-col gap-1">
         {links.map((link) => {
           const isActive =
@@ -55,9 +55,9 @@ export function Sidebar({ variant }: SidebarProps) {
               : pathname.startsWith(link.href));
 
           return (
-            <a
+            <AppLink
               key={link.href}
-              href={appHref(link.href)}
+              href={link.href}
               className={`rounded-lg px-3 py-2 text-sm ${
                 isActive
                   ? "bg-blue-50 font-medium text-blue-600"
@@ -65,7 +65,7 @@ export function Sidebar({ variant }: SidebarProps) {
               }`}
             >
               {link.label}
-            </a>
+            </AppLink>
           );
         })}
       </nav>

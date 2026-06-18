@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { AppLink } from "@/components/ui/AppLink";
 import { useAuthSession } from "@/hooks/useAuthSession";
 import { PublicImage } from "@/components/ui/PublicImage";
 import type { Course } from "@/types";
@@ -15,7 +15,7 @@ export function CourseCard({ course, priority = false }: CourseCardProps) {
   const href = isAuthenticated ? `/courses/${course.slug}` : "/login";
 
   return (
-    <Link href={href} className="course-card">
+    <AppLink href={href} className="course-card">
       {course.thumbnailUrl && (
         <div className="course-thumbnail">
           <PublicImage
@@ -37,6 +37,6 @@ export function CourseCard({ course, priority = false }: CourseCardProps) {
           {course.price === 0 && <span className="course-badge">Free</span>}
         </div>
       </div>
-    </Link>
+    </AppLink>
   );
 }
